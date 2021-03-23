@@ -5,36 +5,30 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.model_selection import train_test_split
 from scipy import stats
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-def explore_univariate(train, cat_vars, quant_vars):
-    for var in cat_vars:
-        explore_univariate_categorical(train, var)
-        print('_________________________________________________________________')
+def explore_univariate(X_train, quant_vars):
     for col in quant_vars:
-        p, descriptive_stats = explore_univariate_quant(train, col)
+        p, descriptive_stats = explore_univariate_quant(X_train, col)
         plt.show(p)
         print(descriptive_stats)
         
-def explore_bivariate(train, target, cat_vars, quant_vars):
-    for cat in cat_vars:
-        explore_bivariate_categorical(train, 'regionidzip', cat)
+def explore_bivariate(X_train_scaled, quant_vars):
     for quant in quant_vars:
-        explore_bivariate_quant(train, 'regionidzip', quant)
+        explore_bivariate_quant(X_train_scaled, 'taxvaluedollarcnt', quant)
 
-def explore_multivariate(train, target, cat_vars, quant_vars):
+def explore_multivariate(X_train_scaled, quant_vars):
     '''
     '''
-    plot_swarm_grid_with_color(train, target, cat_vars, quant_vars)
+    plot_swarm_grid_with_color(X_train_scaled, df.taxvaluedollarcnt , quant_vars)
     plt.show()
-    violin = plot_violin_grid_with_color(train, target, cat_vars, quant_vars)
+    violin = plot_violin_grid_with_color(X_train_scaled, df.taxvaluedollarcnt, quant_vars)
     plt.show()
-    pair = sns.pairplot(data=train, vars=quant_vars, hue='Churn_Yes')
+    pair = sns.pairplot(data=X_train_scaled, vars=quant_vars)
     plt.show()
-    plot_all_continuous_vars(train, 'Churn_Yes', quant_vars)
+    plot_all_continuous_vars(X_train_scaled, 'taxvaluedollarcnt', quant_vars)
     plt.show()    
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
