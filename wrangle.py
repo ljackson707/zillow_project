@@ -4,12 +4,8 @@ from sklearn.model_selection import train_test_split
 
 def clean_zillow(df):
     '''
-    Takes in a df of zillow_data and cleans the data appropriatly by dropping nulls,
-    removing white space,
-    creates dummy variables for Contract type,
-    converts data to numerical, and bool data types, 
-    and drops columsn that are not needed.
-    
+    Takes in a df of zillow_data and cleans the data appropriatly by dropping null values in each column if < 80 percent,
+    fills any extra nan with 0,
     return: df, a cleaned pandas data frame.
     '''
     
@@ -32,8 +28,8 @@ def split_zillow(df):
     and a train, which is 56% of the entire dataframe. 
     It then splits each of the 3 samples into a dataframe with independent variables
     and a series with the dependent, or target variable. 
-    The function returns 3 dataframes and 3 series:
-    X_train (df) & y_train (series), X_validate & y_validate, X_test & y_test. 
+    The function returns 3 dataframes:
+    train (df), validate,  X_test, 
     '''
     # split df into test (20%) and train_validate (80%)
     train_validate, test = train_test_split(df, test_size=.2, random_state=123)
